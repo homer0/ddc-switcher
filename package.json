@@ -1,0 +1,52 @@
+{
+  "name": "ddc-switcher",
+  "description": "Simple app to switch sources on DDC/CI monitors",
+  "version": "1.0.0",
+  "repository": "homer0/ddc-switcher",
+  "author": "Leonardo Apiwan (@homer0) <me@homer0.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"lol\"",
+    "dev": "bun run --watch src/index.tsx",
+    "start": "bun run src/index.tsx",
+    "lint": "lint-staged",
+    "lint:all": "eslint ./ --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "types:check": "tsc --noEmit",
+    "prepare": "husky || true",
+    "docker:build": "docker build -t ddc-switcher ."
+  },
+  "dependencies": {
+    "@elysiajs/html": "^1.1.1",
+    "@elysiajs/static": "^1.1.1",
+    "elysia": "^1.1.25"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@homer0/eslint-plugin": "^12.0.7",
+    "@homer0/prettier-config": "^1.1.3",
+    "eslint": "^8.57.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "bun-types": "^1.1.38"
+  },
+  "engine-strict": true,
+  "engines": {
+    "node": ">=20 <22",
+    "pnpm": ">=8"
+  },
+  "module": "src/index.js",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,json,css,scss,md}": [
+      "./utils/lint-staged-prettier.sh"
+    ],
+    "*.{ts,tsx,js}": [
+      "eslint"
+    ]
+  }
+}
