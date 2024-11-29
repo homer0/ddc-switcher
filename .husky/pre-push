@@ -1,0 +1,3 @@
+#!/bin/sh
+
+bun run types:check && bun test
