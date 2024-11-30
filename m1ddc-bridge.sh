@@ -17,10 +17,10 @@ M1DDC_ERROR_PREFIX="m1ddc-error:"
 
 ## List all displays
 ## Example:
-## m1ddc_display_list
+## m1ddc_get_display_list
 ## [1] DELL U2723QE (SOME-UUID)
 ## [2] DELL U2723QE (SOME-UUID)
-m1ddc_display_list() {
+m1ddc_get_display_list() {
   $M1DDC_BIN_FILE display list;
 }
 
@@ -61,8 +61,8 @@ while true; do
     if [[ ! $M1DDC_CMD == $M1DDC_RES_PREFIX* ]]; then
       M1DDC_RES=""
       case $M1DDC_CMD in
-        "display-list")
-          M1DDC_RES=$(m1ddc_display_list)
+        "get-display-list")
+          M1DDC_RES=$(m1ddc_get_display_list)
           ;;
         get-display-input:*)
           CMD_ARGS=${M1DDC_CMD#*:}
