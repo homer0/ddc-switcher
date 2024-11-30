@@ -19,6 +19,7 @@ const readPipe = async (
     throw new Error('Failed to read from the pipe');
   }
 
+  await Bun.sleep(100 * attempt);
   try {
     const file = Bun.file(CONFIG.pipeFile);
     let text = await file.text();
@@ -63,6 +64,8 @@ const processQueue = async () => {
       const response = await bridgeCommand(command);
       defer.resolve(response);
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('Error running command:', command, error);
       defer.reject(error);
     }
   }
