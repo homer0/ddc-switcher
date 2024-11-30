@@ -14,3 +14,4 @@ helm-charts
 .idea
 coverage*
 m1ddc-bridge.sh
+m1ddc

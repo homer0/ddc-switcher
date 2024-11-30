@@ -10,10 +10,13 @@ This is a small app that will allow me to switch the source of my monitors using
 
 ## Usage
 
-First, you need to put the bridge script in a directory that you'll later mount in the container:
+First, you need to download and `make` [m1ddc](https://github.com/waydabber/m1ddc). That will generate a binary. After that, you need to put the bridge script and the built `m1ddc` binary in a directory that you'll later mount in the container:
 
 ```bash
 mkdir -p /path/to/bridge
+# Copy the m1ddc binary
+cp /path/to/m1ddc /path/to/bridge
+# Copy the bridge script
 cp ./m1ddc-bridge.sh /path/to/bridge
 ```
 

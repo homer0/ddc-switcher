@@ -4,7 +4,7 @@
 
 ## The path to the built m1ddc library
 ## https://github.com/waydabber/m1ddc?tab=readme-ov-file#installation
-M1DDC_BIN_FILE="./m1ddc-dev"
+M1DDC_BIN_FILE="./m1ddc"
 ## The path to the file that will be used as a pipe to communicate with the m1ddc library
 M1DDC_PIPE_FILE="./m1ddc-bridge-pipe"
 ## The prefix that will be used to identify the response of the command.

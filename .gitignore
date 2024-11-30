@@ -42,6 +42,6 @@ package-lock.json
 **/*.bun
 .vscode
 .env
-m1ddc-dev
+m1ddc
 m1ddc-bridge-pipe
 .dev-mount
