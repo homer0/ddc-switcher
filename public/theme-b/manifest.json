@@ -4,7 +4,7 @@
   "start_url": "../../",
   "display": "standalone",
   "background_color": "#1d1d1e",
-  "description": "Simple app to switch sources on DDC/CI monitors",
+  "description": "Simple app to switch inputs on DDC/CI monitors",
   "icons": [
     {
       "src": "icons/favicon-48.png",

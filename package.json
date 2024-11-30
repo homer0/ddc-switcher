@@ -1,6 +1,6 @@
 {
   "name": "ddc-switcher",
-  "description": "Simple app to switch sources on DDC/CI monitors",
+  "description": "Simple app to switch inputs on DDC/CI monitors",
   "version": "1.0.0",
   "repository": "homer0/ddc-switcher",
   "author": "Leonardo Apiwan (@homer0) <me@homer0.com>",
