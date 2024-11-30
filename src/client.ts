@@ -27,7 +27,7 @@ export const getDisplays = async (): Promise<DisplayInfo[]> => {
     }
 
     const {
-      index: indexRaw,
+      index: indexRaw = 1,
       input: inputIdRaw,
       id = 'Unknown ID',
       name = 'Unknown display',
@@ -52,4 +52,37 @@ export const getDisplays = async (): Promise<DisplayInfo[]> => {
 
     return acc;
   }, []);
+};
+
+export type SwitchDisplayInputOptions = {
+  displayIndex: number;
+  inputId: number;
+};
+
+export const switchDisplayInput = async ({
+  displayIndex,
+  inputId,
+}: SwitchDisplayInputOptions): Promise<DisplayInputInfo> => {
+  const input = DISPLAY_INPUT_MAP[inputId];
+  if (!input) {
+    throw new Error('Invalid input ID');
+  }
+
+  let response: string;
+  if (input.alt) {
+    response = await runCommand(`set-display-input-alt:${displayIndex}:${inputId}`);
+  } else {
+    response = await runCommand(`set-display-input:${displayIndex}:${inputId}`);
+  }
+
+  if (!response) {
+    throw new Error('Failed to switch input');
+  }
+
+  const responseInput = Number(response);
+  if (Number.isNaN(responseInput) || !DISPLAY_INPUT_MAP[responseInput]) {
+    throw new Error('Invalid input ID on response');
+  }
+
+  return DISPLAY_INPUT_MAP[responseInput];
 };
