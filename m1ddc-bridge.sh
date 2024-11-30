@@ -18,10 +18,16 @@ M1DDC_ERROR_PREFIX="m1ddc-error:"
 ## List all displays
 ## Example:
 ## m1ddc_get_display_list
-## [1] DELL U2723QE (SOME-UUID)
-## [2] DELL U2723QE (SOME-UUID)
+## [1] DELL U2723QE (SOME-UUID) (27) # (USB-C)
+## [2] DELL U2723QE (SOME-UUID) (17) # (HDMI)
 m1ddc_get_display_list() {
-  $M1DDC_BIN_FILE display list;
+  DISPLAYS=$($M1DDC_BIN_FILE display list);
+  while read -r DISPLAY; do
+    # Split by space, take the first element, and remove the brackets
+    DISPLAY_NUMBER=$(echo $DISPLAY | cut -d' ' -f1 | tr -d '[]')
+    DISPLAY_INPUT=$($M1DDC_BIN_FILE display $DISPLAY_NUMBER get input)
+    echo "$DISPLAY [$DISPLAY_INPUT]"
+  done <<< "$DISPLAYS"
 }
 
 ## Get the input number of a display
