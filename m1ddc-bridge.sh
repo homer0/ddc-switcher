@@ -57,6 +57,20 @@ m1ddc_set_input() {
   fi
 }
 
+## Set the input number of a display (using alternate addressing, as used by LG)
+## Example:
+## m1ddc_set_input_alt 1 209
+## 209 # (DisplayPort 2)
+m1ddc_set_input_alt() {
+  DISPLAY_NUMBER=$1
+  INPUT_NUMBER=$2
+  if [[ $DISPLAY_NUMBER =~ ^[0-9]+$ ]] && [[ $INPUT_NUMBER =~ ^[0-9]+$ ]]; then
+    $M1DDC_BIN_FILE display $1 set input-alt $2;
+  else
+    echo "${M1DDC_ERROR_PREFIX}Invalid argument: $DISPLAY_NUMBER or $INPUT_NUMBER"
+  fi
+}
+
 # Main
 
 while true; do
@@ -79,6 +93,12 @@ while true; do
           INPUT_NUMBER=${CMD_ARGS#*:}
           DISPLAY_NUMBER=${CMD_ARGS%:*}
           M1DDC_RES=$(m1ddc_set_input $DISPLAY_NUMBER $INPUT_NUMBER)
+          ;;
+        set-display-input-alt:*)
+          CMD_ARGS=${M1DDC_CMD#*:}
+          INPUT_NUMBER=${CMD_ARGS#*:}
+          DISPLAY_NUMBER=${CMD_ARGS%:*}
+          M1DDC_RES=$(m1ddc_set_input_alt $DISPLAY_NUMBER $INPUT_NUMBER)
           ;;
         *)
           M1DDC_RES="${M1DDC_ERROR_PREFIX}Unknown command: $M1DDC_CMD"
