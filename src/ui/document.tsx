@@ -22,6 +22,8 @@ export const renderDocument = async ({
     stylesheet = CONFIG.compressCSS ? compressCss(contents) : contents;
   }
 
+  const publicThemePath = `/public/${CONFIG.theme}`;
+
   return (
     <html lang="en">
       <head>
@@ -29,25 +31,25 @@ export const renderDocument = async ({
         {stylesheet && <style>{stylesheet}</style>}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="manifest" href="public/manifest.json" />
+        <link rel="manifest" href={`${publicThemePath}/manifest.json`} />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/public/icons/apple-touch-icon.png"
+          href={`${publicThemePath}/icons/apple-touch-icon.png`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/public/icons/favicon-32x32.png"
+          href={`${publicThemePath}/icons/favicon-32x32.png`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/public/icons/favicon-16x16.png"
+          href={`${publicThemePath}/icons/favicon-16x16.png`}
         />
-        <link rel="shortcut icon" href="/public/icons/favicon.ico" />
+        <link rel="shortcut icon" href={`${publicThemePath}/icons/favicon.ico`} />
         <meta name="theme-color" content="#1d1d1e" />
       </head>
       <body>

@@ -6,6 +6,8 @@ const DEFAULT_BRIDGE_PIPE_FILE = './m1ddc-bridge-pipe';
 const DEFAULT_PIPE_MAX_READ_ATTEMPTS = 10;
 const DEFAULT_ALLOWED_INPUTS = Object.keys(DISPLAY_INPUT_MAP).map(Number);
 
+const altTheme = process.env.ALT_THEME === 'true';
+
 export const CONFIG = {
   title: 'DDC Switcher',
   port: Number(process.env.PORT) || DEFAULT_PORT,
@@ -21,4 +23,5 @@ export const CONFIG = {
   resErrorPrefix: 'm1ddc-error:',
   pipeMaxReadAttempts:
     Number(process.env.BRIDGE_PIPE_MAX_READ_ATTEMPTS) || DEFAULT_PIPE_MAX_READ_ATTEMPTS,
+  theme: altTheme ? 'theme-b' : 'theme-a',
 };
