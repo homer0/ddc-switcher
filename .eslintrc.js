@@ -7,5 +7,7 @@ module.exports = {
   }),
   rules: {
     'node/no-unsupported-features/es-syntax': 'off',
+    'no-restricted-syntax': 'off',
+    'no-continue': 'off',
   },
 };
