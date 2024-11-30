@@ -1,13 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { runCommand } from './bridge';
-import { INPUTS_MAP } from './config';
-
-export type DisplayInputInfo = {
-  id: number;
-  name: string;
-  index: number;
-  alt: boolean;
-};
+import { INPUTS_MAP, type DisplayInputInfo } from './config';
 
 export type DisplayInfo = {
   name: string;
@@ -54,12 +47,7 @@ export const getDisplays = async (): Promise<DisplayInfo[]> => {
       name,
       index,
       id,
-      input: {
-        id: inputId,
-        name: inputInfo[0],
-        index: inputInfo[1],
-        alt: inputInfo[2],
-      },
+      input: inputInfo,
     });
 
     return acc;
