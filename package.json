@@ -18,6 +18,7 @@
   "dependencies": {
     "@elysiajs/html": "^1.1.1",
     "@elysiajs/static": "^1.1.1",
+    "@homer0/deferred": "^3.0.7",
     "elysia": "^1.1.25"
   },
   "devDependencies": {
