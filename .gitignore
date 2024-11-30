@@ -43,3 +43,4 @@ package-lock.json
 .vscode
 .env
 m1ddc-dev
+m1ddc-bridge-pipe
