@@ -8,6 +8,16 @@ import { renderDocument, renderApp } from './ui';
 const app = new Elysia()
   .use(html())
   .use(staticPlugin())
+  .onError((ctx) => {
+    if (ctx.code === 'NOT_FOUND') {
+      return;
+    }
+
+    if (ctx.error) {
+      // eslint-disable-next-line no-console
+      console.error(ctx.error);
+    }
+  })
   .get('/', async () => {
     const displays = await getDisplays();
     return renderDocument({ children: renderApp({ displays }) });
