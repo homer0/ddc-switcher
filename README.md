@@ -23,7 +23,7 @@ cp ./m1ddc-bridge.sh /path/to/bridge
 Then, when you start the container (you can build the image with `bun docker:build`), you need to mount the bridge directory and define the env var with its path so the app can communicate using the pipe:
 
 ```bash
-docker run -it --rm \
+docker run -d \
   # Mount the bridge directory
   -v /path/to/bridge:/bridge \
   # Tell the app about the pipe file in it
@@ -39,6 +39,36 @@ cd /path/to/bridge;
 ```
 
 The bridge will check the pipe file (every 1 second) for commands, execute them, and write the result back for the app to read.
+
+### Bash script
+
+While running the docker container and the bridge manually work, it's not very practical. In order to make this easier, you can use the `ddc-switcher.sh` script.
+
+The script assumes a `mount` directory next to it that will contain the bridge script and the `m1ddc` binary. If you want to use it with a different path, just open the file and change the top variables, they are pretty easy to understand.
+
+The structure should look something like this:
+
+```bash
+.
+├── ddc-switcher.sh
+└── mount
+    ├── m1ddc
+    └── m1ddc-bridge.sh
+```
+
+Then, you can just run the script:
+
+```bash
+./ddc-switcher.sh
+```
+
+The script will kill and remove any existing container with the same name, and any running bridge script. Then it will start everything again.
+
+If you want to just stop the container and the bridge, you can run the script with the `stop` argument:
+
+```bash
+./ddc-switcher.sh stop
+```
 
 ## Configuration
 
