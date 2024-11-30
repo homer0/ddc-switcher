@@ -24,6 +24,10 @@ const app = new Elysia()
       console.error(ctx.error);
     }
   })
+  .get('/api/status', async () => {
+    const displays = await getDisplays();
+    return renderApp({ displays, inputs: allowedInputs });
+  })
   .get('/', async () => {
     const displays = await getDisplays();
     return renderDocument({ children: renderApp({ displays, inputs: allowedInputs }) });

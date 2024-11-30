@@ -51,7 +51,9 @@ export const renderDocument = async ({
         <meta name="theme-color" content="#1d1d1e" />
       </head>
       <body>
-        <main id="root">{children}</main>
+        <main id="root" hx-get="/api/status" hx-trigger="every 10s">
+          {children}
+        </main>
         <script src="/public/vendor/htmx.js" />
       </body>
     </html>
