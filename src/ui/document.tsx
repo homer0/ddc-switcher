@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { Html } from '@elysiajs/html';
 import { CONFIG } from '../config';
+import { renderColorsCssVars } from './colors';
 
 export type RenderDocumentProps = {
   children: JSX.Element;
@@ -32,6 +33,7 @@ export const renderDocument = async ({
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href={`${publicThemePath}/manifest.json`} />
+        {renderColorsCssVars({ theme: CONFIG.theme })}
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -41,13 +43,13 @@ export const renderDocument = async ({
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={`${publicThemePath}/icons/favicon-32x32.png`}
+          href={`${publicThemePath}/icons/favicon-32.png`}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={`${publicThemePath}/icons/favicon-16x16.png`}
+          href={`${publicThemePath}/icons/favicon-16.png`}
         />
         <link rel="shortcut icon" href={`${publicThemePath}/icons/favicon.ico`} />
         <meta name="theme-color" content="#1d1d1e" />

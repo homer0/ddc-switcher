@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-color: #1d1d1e;
+  background-color: var(--background-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
@@ -37,7 +37,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  color: #373738;
+  color: var(--display-icon-label-color);
   font-size: 4rem;
   font-weight: 500;
   width: 100%;
@@ -48,7 +48,7 @@ body {
 }
 
 .display-name {
-  color: #fff;
+  color: var(--display-name-label-color);
   font-size: 1.3rem;
   display: flex;
   justify-content: center;
@@ -71,20 +71,20 @@ body {
 .display-input-button {
   appearance: none;
   border: 0;
-  background-color: #27272b;
+  background-color: var(--switch-button-background-color);
+  color: var(--switch-button-color);
+  border-top: 2px solid var(--switch-button-border-color);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: #fff;
   font-size: 1rem;
   height: 44px;
   width: 100%;
-  border-top: 2px solid #333;
 }
 
 .display-input-button[data-selected] {
-  background-color: #37841a;
+  background-color: var(--switch-button-active-background-color);
   &::before {
     content: '✔';
     margin-right: 10px;

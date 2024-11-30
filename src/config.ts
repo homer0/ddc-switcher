@@ -23,5 +23,5 @@ export const CONFIG = {
   resErrorPrefix: 'm1ddc-error:',
   pipeMaxReadAttempts:
     Number(process.env.BRIDGE_PIPE_MAX_READ_ATTEMPTS) || DEFAULT_PIPE_MAX_READ_ATTEMPTS,
-  theme: altTheme ? 'theme-b' : 'theme-a',
+  theme: altTheme ? ('theme-b' as const) : ('theme-a' as const),
 };

@@ -1,5 +1,6 @@
 import { Html } from '@elysiajs/html';
-import { DISPLAY_ICON } from './icons';
+import { getDisplayIcon } from './icons';
+import { THEMES, type Theme } from './colors';
 import type { DisplayInputInfo } from '../inputs';
 import type { DisplayInfo } from '../client';
 
@@ -41,25 +42,29 @@ export const renderDisplayInputOptions = ({
 export type RenderAppProps = {
   displays: DisplayInfo[];
   inputs: DisplayInputInfo[];
+  theme: Theme;
 };
 
-export const renderApp = ({ displays, inputs }: RenderAppProps): JSX.Element => (
-  <div id="app">
-    <ul class="displays">
-      {displays.map((display) => (
-        <li class="display">
-          <div id={`${display.id}-icon`} class="display-icon">
-            <span>{display.index}</span>
-            {DISPLAY_ICON}
-          </div>
-          <span class="display-name">{display.name}</span>
-          {renderDisplayInputOptions({
-            displayIndex: display.index,
-            inputId: display.input.id,
-            inputs,
-          })}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+export const renderApp = ({ displays, inputs, theme }: RenderAppProps): JSX.Element => {
+  const colors = THEMES[theme];
+  return (
+    <div id="app">
+      <ul class="displays">
+        {displays.map((display) => (
+          <li class="display">
+            <div id={`${display.id}-icon`} class="display-icon">
+              <span>{display.index}</span>
+              {getDisplayIcon({ displayBackgroundColor: colors.displayColor })}
+            </div>
+            <span class="display-name">{display.name}</span>
+            {renderDisplayInputOptions({
+              displayIndex: display.index,
+              inputId: display.input.id,
+              inputs,
+            })}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
