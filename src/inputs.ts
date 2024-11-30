@@ -74,3 +74,5 @@ export const DISPLAY_INPUT_MAP: Record<number, DisplayInputInfo> = {
     alt: true,
   },
 };
+
+export const DISPLAY_INPUTS = Object.values(DISPLAY_INPUT_MAP);

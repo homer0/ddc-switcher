@@ -6,6 +6,8 @@ html {
 
 body {
   background-color: #1d1d1e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 #app {
@@ -16,4 +18,88 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
+}
+
+.displays {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.display-icon {
+  position: relative;
+}
+
+.display-icon span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #373738;
+  font-size: 4rem;
+  font-weight: 500;
+  width: 100%;
+  height: 148px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-name {
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.display-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.display-input {
+  position: relative;
+}
+
+.display-input-button {
+  appearance: none;
+  border: 0;
+  background-color: #27272b;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1rem;
+  height: 44px;
+  width: 100%;
+  border-top: 2px solid #333;
+}
+
+.display-input-button[data-selected] {
+  background-color: #37841a;
+  &::before {
+    content: '✔';
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.display-input:first-child .display-input-button {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-color: transparent;
+}
+
+.display-input:last-child .display-input-button {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
