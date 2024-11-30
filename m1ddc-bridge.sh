@@ -10,6 +10,8 @@ M1DDC_PIPE_FILE="./m1ddc-bridge-pipe"
 ## The prefix that will be used to identify the response of the command.
 ## This script will only respond to commands that do not start with this prefix.
 M1DDC_RES_PREFIX="m1ddc-response:"
+## The prefix that will be used to identify the error of the command.
+M1DDC_ERROR_PREFIX="m1ddc-error:"
 
 # Handlers
 
@@ -31,7 +33,7 @@ m1ddc_get_input() {
   if [[ $DISPLAY_NUMBER =~ ^[0-9]+$ ]]; then
     $M1DDC_BIN_FILE display $1 get input;
   else
-    echo "Invalid argument: $DISPLAY_NUMBER"
+    echo "${M1DDC_ERROR_PREFIX}Invalid argument: $DISPLAY_NUMBER"
   fi
 }
 
@@ -45,7 +47,7 @@ m1ddc_set_input() {
   if [[ $DISPLAY_NUMBER =~ ^[0-9]+$ ]] && [[ $INPUT_NUMBER =~ ^[0-9]+$ ]]; then
     $M1DDC_BIN_FILE display $1 set input $2;
   else
-    echo "Invalid argument: $DISPLAY_NUMBER or $INPUT_NUMBER"
+    echo "${M1DDC_ERROR_PREFIX}Invalid argument: $DISPLAY_NUMBER or $INPUT_NUMBER"
   fi
 }
 
@@ -73,7 +75,7 @@ while true; do
           M1DDC_RES=$(m1ddc_set_input $DISPLAY_NUMBER $INPUT_NUMBER)
           ;;
         *)
-          M1DDC_RES="Unknown command: $M1DDC_CMD"
+          M1DDC_RES="${M1DDC_ERROR_PREFIX}Unknown command: $M1DDC_CMD"
           ;;
       esac
       echo "$M1DDC_RES_PREFIX$M1DDC_RES" > $M1DDC_PIPE_FILE
