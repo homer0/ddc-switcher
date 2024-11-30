@@ -4,6 +4,7 @@ const DEFAULT_PORT = 3000;
 const DEFAULT_BRIDGE_PIPE_FILE = './m1ddc-bridge-pipe';
 const DEFAULT_DISPLAY_INPUT_A = 27;
 const DEFAULT_DISPLAY_INPUT_B = 17;
+const DEFAULT_PIPE_MAX_READ_ATTEMPTS = 10;
 
 export const CONFIG = {
   title: 'DDC Switcher',
@@ -14,6 +15,9 @@ export const CONFIG = {
   stylesheet: './style.css',
   compressCSS: process.env.COMPRESS_CSS !== 'false',
   resPrefix: 'm1ddc-response:',
+  resErrorPrefix: 'm1ddc-error:',
+  pipeMaxReadAttempts:
+    Number(process.env.BRIDGE_PIPE_MAX_READ_ATTEMPTS) || DEFAULT_PIPE_MAX_READ_ATTEMPTS,
 };
 
 export type DisplayInputName = 'DisplayPort' | 'HDMI' | 'USB-C' | 'USB-C/DP';
