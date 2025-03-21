@@ -7,6 +7,7 @@ const DEFAULT_COLORS = {
   switchButtonBackgroundColor: '#27272B',
   switchButtonColor: '#FFF',
   switchButtonBorderColor: '#333',
+  displayErrorColor: '#FF3B30',
 } as const;
 
 export const THEMES = {

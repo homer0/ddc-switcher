@@ -9,15 +9,29 @@ export type DisplayInfo = {
   input: DisplayInputInfo;
 };
 
-export const getDisplays = async (): Promise<DisplayInfo[]> => {
-  const list = await runCommand('get-display-list');
+export type GetDisplaysResponse = {
+  displays: DisplayInfo[];
+  error?: string;
+};
+
+export const getDisplays = async (): Promise<GetDisplaysResponse> => {
+  let list: string;
+  try {
+    list = await runCommand('get-display-list');
+  } catch (error) {
+    return {
+      displays: [],
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+
   const lines = list.split('\n');
   const result: DisplayInfo[] = [];
   if (!lines.length) {
-    return result;
+    return { displays: result };
   }
 
-  return lines.reduce<DisplayInfo[]>((acc, line) => {
+  const displays = lines.reduce<DisplayInfo[]>((acc, line) => {
     const match =
       /(?:\[(?<index>\d+)\]\s*)?(?<name>[^(]+)\s\((?<id>[\w-]+)\)\s\[(?<input>\d+)\]/.exec(
         line,
@@ -52,6 +66,8 @@ export const getDisplays = async (): Promise<DisplayInfo[]> => {
 
     return acc;
   }, []);
+
+  return { displays };
 };
 
 export type SwitchDisplayInputOptions = {

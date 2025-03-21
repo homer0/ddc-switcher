@@ -48,13 +48,18 @@ const app = new Elysia()
     });
   })
   .get('/api/status', async () => {
-    const displays = await getDisplays();
-    return renderApp({ displays, inputs: allowedInputs, theme: CONFIG.theme });
+    const { displays, error } = await getDisplays();
+    return renderApp({ displays, error, inputs: allowedInputs, theme: CONFIG.theme });
   })
   .get('/', async () => {
-    const displays = await getDisplays();
+    const { displays, error } = await getDisplays();
     return renderDocument({
-      children: renderApp({ displays, inputs: allowedInputs, theme: CONFIG.theme }),
+      children: renderApp({
+        displays,
+        error,
+        inputs: allowedInputs,
+        theme: CONFIG.theme,
+      }),
     });
   })
   .listen(CONFIG.port);

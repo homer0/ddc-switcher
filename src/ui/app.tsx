@@ -39,31 +39,68 @@ export const renderDisplayInputOptions = ({
   );
 };
 
+const KNOWN_ERRORS = [
+  {
+    exp: /Failed to read from the pipe/i,
+    message: 'Failed to connect with the bridge',
+  },
+];
+
 export type RenderAppProps = {
   displays: DisplayInfo[];
   inputs: DisplayInputInfo[];
   theme: Theme;
+  error?: string;
 };
 
-export const renderApp = ({ displays, inputs, theme }: RenderAppProps): JSX.Element => {
+export const renderApp = ({
+  displays,
+  inputs,
+  theme,
+  error,
+}: RenderAppProps): JSX.Element => {
   const colors = THEMES[theme];
+  let useError = error;
+  if (useError) {
+    const knownError = KNOWN_ERRORS.find(({ exp }) => useError!.match(exp));
+    if (knownError) {
+      useError = knownError.message;
+    }
+  } else if (displays.length === 0) {
+    useError = 'No displays found';
+  }
+
   return (
     <div id="app">
       <ul class="displays">
-        {displays.map((display) => (
+        {useError && (
           <li class="display">
-            <div id={`${display.id}-icon`} class="display-icon">
-              <span>{display.index}</span>
-              {getDisplayIcon({ displayBackgroundColor: colors.displayColor })}
+            <div class="display-icon-container">
+              <div id="error-icon" class="display-icon">
+                <span>!</span>
+                {getDisplayIcon({ displayBackgroundColor: colors.displayErrorColor })}
+              </div>
             </div>
-            <span class="display-name">{display.name}</span>
-            {renderDisplayInputOptions({
-              displayIndex: display.index,
-              inputId: display.input.id,
-              inputs,
-            })}
+            <span class="display-name">{useError}</span>
           </li>
-        ))}
+        )}
+        {!useError &&
+          displays.map((display) => (
+            <li class="display">
+              <div class="display-icon-container">
+                <div id={`${display.id}-icon`} class="display-icon">
+                  <span>{display.index}</span>
+                  {getDisplayIcon({ displayBackgroundColor: colors.displayColor })}
+                </div>
+              </div>
+              <span class="display-name">{display.name}</span>
+              {renderDisplayInputOptions({
+                displayIndex: display.index,
+                inputId: display.input.id,
+                inputs,
+              })}
+            </li>
+          ))}
       </ul>
     </div>
   );
