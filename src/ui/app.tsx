@@ -46,6 +46,18 @@ const KNOWN_ERRORS = [
   },
 ];
 
+let LAST_KNOWN_DISPLAYS: DisplayInfo[] = [];
+const ensureDisplays = (displays: DisplayInfo[]): DisplayInfo[] => {
+  if (!displays.length && LAST_KNOWN_DISPLAYS.length) {
+    const result = LAST_KNOWN_DISPLAYS;
+    LAST_KNOWN_DISPLAYS = [];
+    return result;
+  }
+
+  LAST_KNOWN_DISPLAYS = displays;
+  return displays;
+};
+
 export type RenderAppProps = {
   displays: DisplayInfo[];
   inputs: DisplayInputInfo[];
@@ -69,6 +81,7 @@ export const renderApp = ({
   } else if (displays.length === 0) {
     useError = 'No displays found';
   }
+  const useDisplays = ensureDisplays(displays);
 
   return (
     <div id="app">
@@ -85,7 +98,7 @@ export const renderApp = ({
           </li>
         )}
         {!useError &&
-          displays.map((display) => (
+          useDisplays.map((display) => (
             <li class="display">
               <div class="display-icon-container">
                 <div id={`${display.id}-icon`} class="display-icon">
