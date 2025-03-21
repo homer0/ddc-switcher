@@ -90,7 +90,9 @@ export const renderApp = ({
           <li class="display">
             <div class="display-icon-container">
               <div id="error-icon" class="display-icon">
-                <span>!</span>
+                <span>
+                  <strong>!</strong>
+                </span>
                 {getDisplayIcon({ displayBackgroundColor: colors.displayErrorColor })}
               </div>
             </div>
